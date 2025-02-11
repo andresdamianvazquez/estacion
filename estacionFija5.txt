@@ -152,7 +152,11 @@ RUS09 (EPS32)
 
 
 --------------------------------------------------------
+<<<<<<< HEAD
 Clima Handai Yantai (EPS32) (prueba) (prueba 2)
+=======
+Clima Handai Yantai (EPS32)
+>>>>>>> 6dffa93ad63b68412fdaa7f06ba4cc2e891f7f52
 --------------------------------------------------------
 --------------------------------------------------------
 REPORTE US08 US07 y UV02 para velocidad de Trabajo
