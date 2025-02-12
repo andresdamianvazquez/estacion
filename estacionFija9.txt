@@ -30,7 +30,7 @@ Resetear
 --------------------------------------------------------
 ESTACION METEOROLOGICA FIJA - CONSULTA Y BLANQUEO DE BUFFER
 --------------------------------------------------------
->SUF00BH$FF030009,,,31,0|H$00054015,,,31,0<Definimos el reporte binario 0
+>SUF00BH$FF030009,,,31,0|H$000501cc,,,31,0<Definimos el reporte binario 0
 >SRS1 9600<                                                                  Velocidad del puerto
 >SAU4100000<
 >STD07000005000000< 5 segundos
