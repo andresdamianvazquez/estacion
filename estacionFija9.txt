@@ -30,16 +30,50 @@ Resetear
 --------------------------------------------------------
 ESTACION METEOROLOGICA FIJA - CONSULTA Y BLANQUEO DE BUFFER
 --------------------------------------------------------
->SUF00BH$FF030009,,,31,0|H$00054015,,,31,0<Definimos el reporte binario 0
+>SUF00BH$FF030009,,,31,0|H$00054015,,,31,0<    CONSULTA A ESTACION N1
+>SUF01BH$FF03000F,,,31,0|H$0002E1D6,,,31,0<    CONSULTA A ESTACION N2
+>SUF02BH$FF030020,,,31,0|H$000991D8,,,31,0<    CONSULTA A ESTACION N3
+
 >SRS1 9600<                                                                  Velocidad del puerto
 >SAU4100000<
->STD07000005000000< 5 segundos
->SEDD2 TD07-+ + NN TR1 {SSBS1NOPU000}<  cada 5 segundos enviar el reporte binario U0 por el puerto serial 1
+>STD07000030000000< 30 segundos
+>SEDD2 TD07-+ + NN TR1 {SSBS1NOPU000}<  cada 30 segundos enviar el reporte binario U0 por el puerto serial 1
 >STX06CS1000100,,,H< capturamos lo que viene por serial durante un segundo
 
->STD06000010000000< para blanquear TX06 si no se recibe comunicación
+>STD060000600000000< para blanquear TX06 si no se recibe comunicación (60 SEGUNDOS)
 >SED06 TD06-+ + NN SGN {STX06,---}< no recibí datos entonces blanqueo TX06
 >SED07 TX06-+ + NN SGN {STD06*}< recibí datos entonces reseteo TD06 para no blanquear
+
+>SED09 TX06-+ + NN TR1 {SSBS1NOPU100}< enviar el reporte binario U1 por el puerto serial 1
+>STX12CS1000100,,,H< H< capturamos lo que viene por serial durante un segundo
+
+>STD080000600000000< para blanquear TX12 si no se recibe comunicación (60 SEGUNDOS)
+>SED10 TD08-+ + NN SGN {STX12,---}< NO RECIBI DATOS, BLANQUEO TX12
+>SED11 TX12-+ + NN SGN {TD08*}< RECIBI DATOS, RESET TD08
+
+>SED12 TX12-+ + NN TR1 {SSBS1NOPU200}< enviar el reporte binario U2 por el puerto serial 2
+>STX13CS1000100,,,H< H< capturamos lo que viene por serial durante un segundo
+
+>STD090000600000000< para blanquear TX13 si no se recibe comunicación (60 SEGUNDOS)
+>SED13 TD09-+ + NN SGN {STX13,---}< NO RECIBI DATOS, BLANQUEO TX13
+>SED11 TX13-+ + NN SGN {TD09*}< RECIBI DATOS, RESET TD09
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --------------------------------------------------------
 ARMADO DE REPORTE 04 Clima
