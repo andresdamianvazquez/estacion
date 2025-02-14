@@ -79,7 +79,7 @@ ESTACION METEOROLOGICA FIJA - CONSULTA Y BLANQUEO DE BUFFER
 ARMADO DE REPORTE 04 Clima
 --------------------------------------------------------
 
->SUC04 QPH,4,12|QTX06,13,104< para reportar lo recibido en TX06
+>SUC04 QPH,4,12|QTX06,13,104|QTX12,13,50|QTX13,13,50< para reportar lo recibido en TX06
 >STD03000300000000< DISPARADOR QUE DEFINE EL TIEMPO DE GRABADO DE LOS REPORTES 04, 07 Y 08
 
 --------------------------------------------------------
