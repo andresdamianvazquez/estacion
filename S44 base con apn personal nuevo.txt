@@ -1,0 +1,52 @@
+﻿SOLO SE USA CON CABLE SERIAL !!
+Configuración básica para que se conecte por primera vez al server y empiece a
+descargar configuraciones cargadas con “send configuration”
+
+
+>SFD55AA< borrar memoria 
+
+
+>SPW,geo18ris,geo18ris<
+>SPWgeo18ris,,< sin clave
+
+
+TD y evento para que transmita cada 10 segundos y poder configurar por remoto
+>STD31000010000000<
+>SED00 TD31-+ + GP IP0< 
+---------------------------------------------------------------------------------------------------------------
+CONFIGURACION GPRS , IP y PUERTO
+>SGR m2m.personal.com,,< apn
+>SGR igprs.claro.com.ar,,< apn
+>SGR wing.personal.com,,< APN Sims nuevas Manager
+>SGR m2m.movistar,movistar,movistar< apn Sims viejos
+
+>SIP0 udp2.geoagris.com.ar,UDP,8888<
+>SIP1 udp.agriexplorer.net,UDP,8888<
+----------------------------------------
+CONFIGURACION DE BAJADA AUTOMATICA DE DATA LOG y SDM
+>SLD IP0<   para LOG
+>SSD IP0<   para SDM 
+>SCC0018000< TIEMPO CAMBIO DE IP Luego de tiempo sin transmitir
+>SED40 RT00-+|RE01-+|RE81-+ + NN SGN {SCC00R}{SLD IP0}{SSD IP0}<        
+>SED41 CC00-+&SG16+ + NN SGN {SCC00R}{SG160}{SLD IP1}{SSD IP1}<
+>SED42 CC00-+&SG16- + NN SGN {SCC00R}{SG161}{SLD IP0}{SSD IP0}<
+---------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------------
+Firmware
+Ahora es este comando -- todavia no hay ningun IP de GTE
+SATP xxx.yyy.www.zzz,p..p,c..c,t..t
+xxx.yyy.www.zzz Dirección IP o nombre de dominio del servidor (host)
+p..p Puerto de conexión
+c..c Comando, por ejemplo UPDATE
+t..t Tiempo de reconexión Opcional (0-3600) 0=NOP
+Finalizar la conexión:
+SATPD
+
+
+---------------------------------------------------------------------------------------------------------------
+77 ACTUALIZACION CONFIGURACION  Y RESETEO EQUIPO
+>SEEU55AA< Actualiza EE 
+>SEDU55AA<  //ACTUALIZA LOS EVENTOS EN LA MEMORIA DE EJECUCION  !!!!
+>SSR55AA*<

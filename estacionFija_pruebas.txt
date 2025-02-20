@@ -16,17 +16,24 @@ Resetear
 ESTACION METEOROLOGICA FIJA - CONSULTA Y BLANQUEO DE BUFFER
 --------------------------------------------------------
 >SUF00BH$FF030009,,,31,0|H$00054015,,,31,0<    CONSULTA A ESTACION N1
+>SUF01BH$FF03000F,,,31,0|H$0002E1D6,,,31,0<    CONSULTA A ESTACION N2
+>SUF02BH$FF030020,,,31,0|H$000991D8,,,31,0<    CONSULTA A ESTACION N3
 
+>SCC040003< contador 3 segundos para el segundo reporte
+>SCC0500003< contador 3 segundos para el tercer reporte
 
 >SRS1 9600<                                                                  Velocidad del puerto
 >SAU4100000<
->STD07000005000000< 05 segundos
->SEDD2 TD07-+ + NN TR1 {SSBS1NOPU000}<  cada 05 segundos enviar el reporte binario U0 por el puerto serial 1
->STX06CS1000100,,,H< capturamos lo que viene por serial durante un segundo
+>STD07000009000000< 09 segundos
+>SEDD2 TD07-+ + NN TR1 {SSBS1NOPU000}{SCC04R}{STX06CS1000010,,,H}<  cada 20 segundos enviar el reporte binario U0 por el puerto serial 1 y activo contador de segunda consulta
 
->STD060000100000000< para blanquear TX06 si no se recibe comunicación (10 SEGUNDOS)
+
+>STD06000060000000< para blanquear TX06 si no se recibe comunicación (10 SEGUNDOS)
 >SED06 TD06-+ + NN SGN {STX06,$VACIO}< no recibí datos entonces blanqueo TX06
 >SED07 TX06-+ + NN SGN {STD06*}< recibí datos entonces reseteo TD06 para no blanquear
+
+>SED09 CC04-+ + NN TR1 {SSBS1NOPU100}{SCC04S}{STX12CS1000010,,,H}< enviar el reporte binario U1 por el puerto serial 1
+
 
 
 
@@ -36,7 +43,9 @@ ARMADO DE REPORTE 04 Clima
 --------------------------------------------------------
 
 
->SUC04 QPH,4,12|$CLITEMP:|QTX06,13,104<
+>SUC04 QPH,4,12|$CLITEMP:|QTXC06,13,104<
+>SUC03 QPH,4,12|$CLISEG:|QTXC12,7,50<
+
 >STD03000010000000< DISPARADOR QUE DEFINE EL TIEMPO DE GRABADO DE LOS REPORTES 04, 07 Y 08
 
 --------------------------------------------------------
@@ -62,6 +71,8 @@ envio de reportes
 >SED05 TD03-+&IN07+ + U4 LOG< reportar lo recibido en TX06
 >SED60 TD03-+&IN07+ + U7 LOG< reporte 07 cada 5 minutos
 >SED61 TD03-+&IN07+ + U8 LOG< reporte 08 cada 5 minutos
+>SED62 TD03-+&IN07+ + U3 LOG< reporte 08 cada 5 minutos
+
 
 
 --------------------------------------------------------

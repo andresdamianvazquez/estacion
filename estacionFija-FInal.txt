@@ -37,6 +37,8 @@ ESTACION METEOROLOGICA FIJA - CONSULTA Y BLANQUEO DE BUFFER
 >SRS1 9600<                                                                  Velocidad del puerto
 >SAU4100000<
 >STD07000030000000< 30 segundos
+>SCC0400005< contador 5 segundos para el segundo reporte
+>SCC0500005< contador 5 segundos para el tercer reporte
 >SEDD2 TD07-+ + NN TR1 {SSBS1NOPU000}<  cada 30 segundos enviar el reporte binario U0 por el puerto serial 1
 >STX06CS1000100,,,H< capturamos lo que viene por serial durante un segundo
 
